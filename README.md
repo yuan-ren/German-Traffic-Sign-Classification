@@ -15,14 +15,15 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image1]: ./examples/class_size.png "Visualization"
+[image2]: ./examples/grayscale.png "Grayscaling"
+[image3]: ./examples/augmentation.png "Changing perspective"
+[image4]: ./examples/test1.jpg "Traffic Sign 1"
+[image5]: ./examples/test2.jpg "Traffic Sign 2"
+[image6]: ./examples/test3.jpg "Traffic Sign 3"
+[image7]: ./examples/test4.jpg "Traffic Sign 4"
+[image8]: ./examples/test5.jpg "Traffic Sign 5"
+[image9]: ./examples/test_images_cropped.png "Processed test images"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -151,38 +152,79 @@ Here are five German traffic signs that I found on the web:
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
 
-The first image might be difficult to classify because ...
+I cropped the image to 32x32, then I normalized the images and converted them into grayscale. After processing, test images look like this:
+
+![alt text][image9]
+
+The first two images are easy. The third one is a little difficult as the sign is off-center. The fourth and fifth images are not very clear so they might be dificult to classify.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 16th cell of the Ipython notebook.
 
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Turn right ahead      		| Turn right ahead   									| 
+| Road work     			| Road work 										|
+| Road work					| Road work											|
+| No passing	      		| No passing					 				|
+| 30km/h			| 30km/h      							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of 96%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the 17th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is sure that this is a sign of turn right ahead (probability of 1.0), and the image does contain a sign of turn right ahead. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| Turn right ahead | 100.00% |
+| Keep left | 0.00% |
+| Speed limit (60km/h) | 0.00% |
+| End of speed limit (80km/h) | 0.00% |
+| Vehicles over 3.5 metric tons prohibited | 0.00% |
 
+For the second image, the model is sure that this is a sign of road work (probability of 1.0), and the image does contain a sign of road work. The top five soft max probabilities were 
 
-For the second image ... 
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Road work  | 100.00% |
+| Slippery road | 0.00% |
+| Road narrows on the right | 0.00% |
+| Bumpy road | 0.00% |
+| Traffic signals | 0.00% |
+
+For the third image, the model is sure that this is a sign of road work (probability of 1.0), and the image does contain a sign of road work. The top five soft max probabilities were 
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Road work  | 100.00% |
+| Speed limit (20km/h)  | 0.00% |
+| Traffic signals  |  0.00% |
+| Speed limit (30km/h)  |  0.00% |
+| Road narrows on the right  |  0.00% |
+
+For the fourth image, the model is only slightly sure that this is a sign of no passing (probability of 0.5). The top five soft max probabilities were 
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| No passing |  50.51% |
+| End of no passing |  49.32% |
+| Yield |  0.17% |
+| Speed limit (120km/h) |  0.00% |
+| Vehicles over 3.5 metric tons prohibited |  0.00% |
+
+For the fifth image, the model is pretty sure that this is a sign of 30km/h (probability of 0.96). The top five soft max probabilities were 
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Speed limit (30km/h) |  95.92% |
+| Speed limit (50km/h) |  4.03% |
+| Speed limit (20km/h) |  0.05% |
+| Speed limit (70km/h) |  0.00% |
+| Speed limit (120km/h) |  0.00% |
